@@ -1,5 +1,11 @@
+import GameFrame from "./GameFrame";
+
 function App() {
-  return <div>Hello world</div>;
+  return (
+    <div>
+      <GameFrame />
+    </div>
+  );
 }
 
 export default App;

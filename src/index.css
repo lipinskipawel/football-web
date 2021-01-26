@@ -1,0 +1,11 @@
+.game-frame {
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 600px;
+  height: 800px;
+  /* padding: 10px;*/
+}
+
+.game-frame canvas {
+  border: 1px solid red;
+}
