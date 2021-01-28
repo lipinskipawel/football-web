@@ -1,5 +1,8 @@
 import { useRef } from "react";
 
+const width = 500;
+const height = 600;
+
 const GameFrame = () => {
   const canvasRef = useRef(null);
   const handleOnClick = (event) => {
@@ -12,7 +15,12 @@ const GameFrame = () => {
 
   return (
     <div className="game-frame">
-      <canvas onClick={handleOnClick} ref={canvasRef}></canvas>
+      <canvas
+        onClick={handleOnClick}
+        ref={canvasRef}
+        width={width}
+        height={height}
+      ></canvas>
     </div>
   );
 };

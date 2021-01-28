@@ -1,7 +1,12 @@
+.navbar {
+  width: 800px;
+  margin: 0 auto;
+}
+
 .game-frame {
   border: 1px solid black;
   margin: 0 auto;
-  width: 600px;
+  width: 800px;
   height: 800px;
   /* padding: 10px;*/
 }
