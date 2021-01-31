@@ -12,12 +12,10 @@ const GameFrame = () => {
     contextRef.current = context;
   }, []);
 
-  const handleOnClick = (event) => {
-    console.log(contextRef);
-    event.stopPropagation();
-    const x = event.nativeEvent.offsetX;
-    const y = event.nativeEvent.offsetY;
-    contextRef.current.fillRect(x, y, 20, 20);
+  const handleOnClick = ({ nativeEvent }) => {
+    nativeEvent.stopPropagation();
+    const { offsetX, offsetY } = nativeEvent;
+    contextRef.current.fillRect(offsetX, offsetY, 20, 20);
   };
 
   return (
