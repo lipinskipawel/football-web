@@ -7,12 +7,14 @@ const useCanvas = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     contextRef.current = context;
+    contextRef.current.beginPath();
   }, []);
 
   const handleOnClick = ({ nativeEvent }) => {
     nativeEvent.stopPropagation();
     const { offsetX, offsetY } = nativeEvent;
-    contextRef.current.fillRect(offsetX, offsetY, 20, 20);
+    contextRef.current.lineTo(offsetX, offsetY);
+    contextRef.current.stroke();
   };
 
   return [canvasRef, handleOnClick];
