@@ -8,6 +8,9 @@ const useCanvas = () => {
     const context = canvas.getContext("2d");
     contextRef.current = context;
     contextRef.current.beginPath();
+    // context.fillStyle = "green";
+    context.fillStyle = "rgba(0, 170, 45)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
   }, []);
 
   const handleOnClick = ({ nativeEvent }) => {
