@@ -23,6 +23,56 @@ function drawDots(width, height, cxt) {
   }
 }
 
+function drawPitch(width, height, cxt) {
+  const spaceBetweenDotsH = width / 9;
+  const spaceBetweenDotsV = height / 13;
+
+  const startingPointH = spaceBetweenDotsH / 2;
+  const startingPointV = spaceBetweenDotsV / 2;
+
+  cxt.beginPath();
+  cxt.strokeStyle = "white";
+  cxt.lineWidth = 5;
+  cxt.moveTo(startingPointH, startingPointV + spaceBetweenDotsV);
+  cxt.lineTo(startingPointH, startingPointV + spaceBetweenDotsV * 11);
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 3,
+    startingPointV + spaceBetweenDotsV * 11
+  );
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 3,
+    startingPointV + spaceBetweenDotsV * 12
+  );
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 5,
+    startingPointV + spaceBetweenDotsV * 12
+  );
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 5,
+    startingPointV + spaceBetweenDotsV * 11
+  );
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 8,
+    startingPointV + spaceBetweenDotsV * 11
+  );
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 8,
+    startingPointV + spaceBetweenDotsV
+  );
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 5,
+    startingPointV + spaceBetweenDotsV
+  );
+  cxt.lineTo(startingPointH + spaceBetweenDotsH * 5, startingPointV);
+  cxt.lineTo(startingPointH + spaceBetweenDotsH * 3, startingPointV);
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 3,
+    startingPointV + spaceBetweenDotsV
+  );
+  cxt.lineTo(startingPointH, startingPointV + spaceBetweenDotsV);
+  cxt.stroke();
+}
+
 const useCanvas = () => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
@@ -34,6 +84,7 @@ const useCanvas = () => {
     context.fillStyle = "rgba(0, 170, 45)";
     context.fillRect(0, 0, canvas.width, canvas.height);
     drawDots(canvas.width, canvas.height, contextRef.current);
+    drawPitch(canvas.width, canvas.height, contextRef.current);
     contextRef.current.beginPath();
   }, []);
 
