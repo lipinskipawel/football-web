@@ -70,6 +70,24 @@ function drawPitch(width, height, cxt) {
   cxt.stroke();
 }
 
+function startDrawingMovesFromTheCenter(width, height, cxt) {
+  const spaceBetweenDotsH = width / 9;
+  const spaceBetweenDotsV = height / 13;
+
+  const startingPointH = spaceBetweenDotsH / 2;
+  const startingPointV = spaceBetweenDotsV / 2;
+
+  cxt.beginPath();
+  cxt.moveTo(
+    startingPointH + spaceBetweenDotsH * 4,
+    startingPointV + spaceBetweenDotsV * 6
+  );
+  cxt.lineTo(
+    startingPointH + spaceBetweenDotsH * 4,
+    startingPointV + spaceBetweenDotsV * 6
+  );
+}
+
 const useCanvas = () => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
@@ -81,7 +99,11 @@ const useCanvas = () => {
     context.fillRect(0, 0, canvas.width, canvas.height);
     drawDots(canvas.width, canvas.height, contextRef.current);
     drawPitch(canvas.width, canvas.height, contextRef.current);
-    contextRef.current.beginPath();
+    startDrawingMovesFromTheCenter(
+      canvas.width,
+      canvas.height,
+      contextRef.current
+    );
   }, []);
 
   const handleOnClick = ({ nativeEvent }) => {
