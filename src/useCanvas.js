@@ -1,17 +1,14 @@
 import { useEffect, useRef } from "react";
+import GameEngine from "./GameEngine";
 
 function drawDots(width, height, cxt) {
-  const spaceBetweenDotsH = width / 9;
-  const shiftDotsHorizontally = spaceBetweenDotsH / 2;
-
-  const spaceBetweenDotsV = height / 13;
-  const shiftDotsVertically = spaceBetweenDotsV / 2;
+  const dots = GameEngine.computeDots(width, height);
   const dotSize = 5;
 
   cxt.strokeStyle = "white";
   cxt.fillStyle = "white";
-  for (var i = shiftDotsHorizontally; i < width; i += spaceBetweenDotsH) {
-    for (var j = shiftDotsVertically; j < height; j += spaceBetweenDotsV) {
+  for (var i = dots.startingH; i < width; i += dots.spaceBetweenDotsH) {
+    for (var j = dots.startingV; j < height; j += dots.spaceBetweenDotsV) {
       cxt.beginPath();
       cxt.arc(i, j, dotSize, 0, Math.PI * 2, false);
       cxt.fill();
@@ -21,70 +18,62 @@ function drawDots(width, height, cxt) {
 }
 
 function drawPitch(width, height, cxt) {
-  const spaceBetweenDotsH = width / 9;
-  const spaceBetweenDotsV = height / 13;
-
-  const startingPointH = spaceBetweenDotsH / 2;
-  const startingPointV = spaceBetweenDotsV / 2;
+  const dots = GameEngine.computeDots(width, height);
 
   cxt.beginPath();
   cxt.strokeStyle = "white";
   cxt.lineWidth = 5;
-  cxt.moveTo(startingPointH, startingPointV + spaceBetweenDotsV);
-  cxt.lineTo(startingPointH, startingPointV + spaceBetweenDotsV * 11);
+  cxt.moveTo(dots.startingH, dots.startingV + dots.spaceBetweenDotsV);
+  cxt.lineTo(dots.startingH, dots.startingV + dots.spaceBetweenDotsV * 11);
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 3,
-    startingPointV + spaceBetweenDotsV * 11
+    dots.startingH + dots.spaceBetweenDotsH * 3,
+    dots.startingV + dots.spaceBetweenDotsV * 11
   );
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 3,
-    startingPointV + spaceBetweenDotsV * 12
+    dots.startingH + dots.spaceBetweenDotsH * 3,
+    dots.startingV + dots.spaceBetweenDotsV * 12
   );
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 5,
-    startingPointV + spaceBetweenDotsV * 12
+    dots.startingH + dots.spaceBetweenDotsH * 5,
+    dots.startingV + dots.spaceBetweenDotsV * 12
   );
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 5,
-    startingPointV + spaceBetweenDotsV * 11
+    dots.startingH + dots.spaceBetweenDotsH * 5,
+    dots.startingV + dots.spaceBetweenDotsV * 11
   );
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 8,
-    startingPointV + spaceBetweenDotsV * 11
+    dots.startingH + dots.spaceBetweenDotsH * 8,
+    dots.startingV + dots.spaceBetweenDotsV * 11
   );
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 8,
-    startingPointV + spaceBetweenDotsV
+    dots.startingH + dots.spaceBetweenDotsH * 8,
+    dots.startingV + dots.spaceBetweenDotsV
   );
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 5,
-    startingPointV + spaceBetweenDotsV
+    dots.startingH + dots.spaceBetweenDotsH * 5,
+    dots.startingV + dots.spaceBetweenDotsV
   );
-  cxt.lineTo(startingPointH + spaceBetweenDotsH * 5, startingPointV);
-  cxt.lineTo(startingPointH + spaceBetweenDotsH * 3, startingPointV);
+  cxt.lineTo(dots.startingH + dots.spaceBetweenDotsH * 5, dots.startingV);
+  cxt.lineTo(dots.startingH + dots.spaceBetweenDotsH * 3, dots.startingV);
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 3,
-    startingPointV + spaceBetweenDotsV
+    dots.startingH + dots.spaceBetweenDotsH * 3,
+    dots.startingV + dots.spaceBetweenDotsV
   );
-  cxt.lineTo(startingPointH, startingPointV + spaceBetweenDotsV);
+  cxt.lineTo(dots.startingH, dots.startingV + dots.spaceBetweenDotsV);
   cxt.stroke();
 }
 
 function startDrawingMovesFromTheCenter(width, height, cxt) {
-  const spaceBetweenDotsH = width / 9;
-  const spaceBetweenDotsV = height / 13;
-
-  const startingPointH = spaceBetweenDotsH / 2;
-  const startingPointV = spaceBetweenDotsV / 2;
+  const dots = GameEngine.computeDots(width, height);
 
   cxt.beginPath();
   cxt.moveTo(
-    startingPointH + spaceBetweenDotsH * 4,
-    startingPointV + spaceBetweenDotsV * 6
+    dots.startingH + dots.spaceBetweenDotsH * 4,
+    dots.startingV + dots.spaceBetweenDotsV * 6
   );
   cxt.lineTo(
-    startingPointH + spaceBetweenDotsH * 4,
-    startingPointV + spaceBetweenDotsV * 6
+    dots.startingH + dots.spaceBetweenDotsH * 4,
+    dots.startingV + dots.spaceBetweenDotsV * 6
   );
 }
 
