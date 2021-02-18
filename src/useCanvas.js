@@ -80,9 +80,12 @@ function startDrawingMovesFromTheCenter(width, height, cxt) {
 const useCanvas = () => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
+  const engine = useRef(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+    engine.current = new GameEngine(canvas.width, canvas.height);
     contextRef.current = context;
     context.fillStyle = "rgba(0, 170, 45)";
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -98,7 +101,8 @@ const useCanvas = () => {
   const handleOnClick = ({ nativeEvent }) => {
     nativeEvent.stopPropagation();
     const { offsetX, offsetY } = nativeEvent;
-    contextRef.current.lineTo(offsetX, offsetY);
+    const { x, y } = engine.current.realCoordinates(offsetX, offsetY);
+    contextRef.current.lineTo(x, y);
     contextRef.current.stroke();
   };
 
