@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import GameEngine from "./GameEngine";
+import GameEngine from "../model/GameEngine";
 
 function drawDots(width, height, cxt) {
   const dots = GameEngine.computeDots(width, height);

@@ -1,4 +1,4 @@
-import useCanvas from "./useCanvas";
+import useCanvas from "./ui/useCanvas";
 
 const width = 500;
 const height = 600;
