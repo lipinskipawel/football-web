@@ -1,4 +1,4 @@
-import GameFrame from "./GameFrame";
+import GameFrame from "./game/GameFrame";
 import Navbar from "./Navbar";
 
 function App() {
