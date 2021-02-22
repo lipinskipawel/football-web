@@ -4,9 +4,7 @@ class GameEngine {
   constructor(width, height) {
     this.width = width;
     this.height = height;
-    this.xes = this._computeXes(width);
-    this.yes = this._computeYes(height);
-    this.points = this.computeAllPoints(width, height);
+    this.points = this.getAllDots();
   }
 
   realCoordinates(x, y) {
@@ -26,14 +24,14 @@ class GameEngine {
     return this.points[realCoordinates[0].index];
   }
 
-  computeAllPoints(width, height) {
-    const x = this._computeXes(width);
-    const y = this._computeYes(height);
+  getAllDots() {
+    const x = this._computeXes(this.width);
+    const y = this._computeYes(this.height);
     var points = [];
 
-    for (var i = 0; i < x.length; i++) {
-      for (var j = 0; j < y.length; j++) {
-        points.push(new Point(x[i], y[j]));
+    for (var i = 0; i < y.length; i++) {
+      for (var j = 0; j < x.length; j++) {
+        points.push(new Point(x[j], y[i]));
       }
     }
     return points;
@@ -67,22 +65,6 @@ class GameEngine {
 
   canMove(position) {
     return true;
-  }
-
-  static computeDots(width, height) {
-    const spaceBetweenDotsH = width / 9;
-    const spaceBetweenDotsV = height / 13;
-
-    const startingPointH = spaceBetweenDotsH / 2;
-    const startingPointV = spaceBetweenDotsV / 2;
-
-    const dots = {
-      startingH: startingPointH,
-      spaceBetweenDotsH: spaceBetweenDotsH,
-      startingV: startingPointV,
-      spaceBetweenDotsV: spaceBetweenDotsV,
-    };
-    return dots;
   }
 }
 
