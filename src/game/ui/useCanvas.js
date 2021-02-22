@@ -58,15 +58,12 @@ const useCanvas = () => {
     startDrawingMovesFromTheCenter(engine.current.points, contextRef.current);
   }, []);
 
-  const handleOnClick = ({ nativeEvent }) => {
-    nativeEvent.stopPropagation();
-    const { offsetX, offsetY } = nativeEvent;
-    const { x, y } = engine.current.realCoordinates(offsetX, offsetY);
+  const drawMove = (x, y) => {
     contextRef.current.lineTo(x, y);
     contextRef.current.stroke();
   };
 
-  return [canvasRef, handleOnClick];
+  return [canvasRef, drawMove];
 };
 
 export default useCanvas;
