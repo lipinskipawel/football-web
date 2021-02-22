@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import GameEngine from "../model/GameEngine";
 
 function drawDots(dots, cxt) {
-  const dotSize = 5;
+  const dotSize = 3;
 
   cxt.strokeStyle = "white";
   cxt.fillStyle = "white";
