@@ -7,7 +7,7 @@ class GameEngine {
     this.points = this.getAllDots();
   }
 
-  realCoordinates(x, y) {
+  toPoint(x, y) {
     const realCoordinates = this.points
       .map((point, index) => {
         const distance = point.computeDistance(x, y);

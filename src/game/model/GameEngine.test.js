@@ -4,7 +4,7 @@ import Point from "./Point";
 test("should pick the same point when clicking at that point", () => {
   const engine = new GameEngine(90, 130);
 
-  const point = engine.realCoordinates(5, 5);
+  const point = engine.toPoint(5, 5);
 
   expect(point).toEqual(new Point(5, 5));
 });
@@ -12,7 +12,7 @@ test("should pick the same point when clicking at that point", () => {
 test("should pick nearest point when clicking (-1, +4)", () => {
   const engine = new GameEngine(90, 130);
 
-  const point = engine.realCoordinates(54, 29);
+  const point = engine.toPoint(54, 29);
 
   expect(point).toEqual(new Point(55, 25));
 });
@@ -21,7 +21,7 @@ test("should pick goal point when clicking at (+3, -2)", () => {
   const expectedPoint = new Point(45, 5);
   const engine = new GameEngine(90, 130);
 
-  const actualPoint = engine.realCoordinates(48, 3);
+  const actualPoint = engine.toPoint(48, 3);
 
   expect(actualPoint).toEqual(expectedPoint);
 });
@@ -30,7 +30,7 @@ test("should pick starting point when clicking at (0, 0)", () => {
   const expectedPoint = new Point(5, 5);
   const engine = new GameEngine(90, 130);
 
-  const actualPoint = engine.realCoordinates(0, 0);
+  const actualPoint = engine.toPoint(0, 0);
 
   expect(actualPoint).toEqual(expectedPoint);
 });

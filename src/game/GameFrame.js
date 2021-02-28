@@ -11,8 +11,8 @@ const GameFrame = () => {
   const onClick = ({ nativeEvent }) => {
     nativeEvent.stopPropagation();
     const { offsetX, offsetY } = nativeEvent;
-    const { x, y } = engine.realCoordinates(offsetX, offsetY);
-    drawMove(x, y);
+    const point = engine.toPoint(offsetX, offsetY);
+    drawMove(point);
   };
 
   return (

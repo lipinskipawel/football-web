@@ -58,8 +58,8 @@ const useCanvas = () => {
     startDrawingMovesFromTheCenter(engine.current.points, contextRef.current);
   }, []);
 
-  const drawMove = (x, y) => {
-    contextRef.current.lineTo(x, y);
+  const drawMove = (point) => {
+    contextRef.current.lineTo(point.x, point.y);
     contextRef.current.stroke();
   };
 
