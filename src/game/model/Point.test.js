@@ -1,5 +1,46 @@
-import Point from "./Point";
+import Point, { directionToDifference } from "./Point";
 
+// canMove testing
+test("should allow to move to next right point", () => {
+  const point = new Point(55, 25, 0);
+
+  const actual = point.canMove(1);
+
+  expect(actual).toEqual(true);
+});
+
+test("should allow to move to next left point", () => {
+  const point = new Point(55, 25, 2);
+
+  const actual = point.canMove(1);
+
+  expect(actual).toEqual(true);
+});
+
+test("should not allow to move to the same point", () => {
+  const point = new Point(55, 25, 2);
+
+  const actual = point.canMove(new Point(50, 20, 2));
+
+  expect(actual).toEqual(false);
+});
+
+test("should not allow to move to not next point", () => {
+  const point = new Point(55, 25, 2);
+
+  const actual = point.canMove(new Point(50, 20, 19));
+
+  expect(actual).toEqual(false);
+});
+
+// direction to difference and vice versa testing
+test("should compute difference of N", () => {
+  const diff = directionToDifference("N");
+
+  expect(diff).toEqual(-9);
+});
+
+// compute distance testing
 test("should compute distance correctly with big numbers", () => {
   const point = new Point(55, 25);
 

@@ -2,9 +2,8 @@ import Point from "./Point";
 
 class GameEngine {
   constructor(width, height) {
-    this.width = width;
-    this.height = height;
-    this.points = this.getAllDots();
+    this.points = this.getAllDots(width, height);
+    this.ball = this.points[58];
   }
 
   toPoint(x, y) {
@@ -24,14 +23,16 @@ class GameEngine {
     return this.points[realCoordinates[0].index];
   }
 
-  getAllDots() {
-    const x = this._computeXes(this.width);
-    const y = this._computeYes(this.height);
+  getAllDots(width, height) {
+    const x = this._computeXes(width);
+    const y = this._computeYes(height);
+    var index = 0;
     var points = [];
 
     for (var i = 0; i < y.length; i++) {
       for (var j = 0; j < x.length; j++) {
-        points.push(new Point(x[j], y[i]));
+        points.push(new Point(x[j], y[i], index));
+        index++;
       }
     }
     return points;
@@ -63,8 +64,14 @@ class GameEngine {
     return this.points;
   }
 
-  canMove(position) {
-    return true;
+  makeMove(point) {
+    this.ball.makeMove(point);
+    this.points[point.index].makeMove(this.ball);
+    this.ball = this.points[point.index];
+  }
+
+  canMove(point) {
+    return this.ball.canMove(point.index);
   }
 }
 

@@ -12,7 +12,11 @@ const GameFrame = () => {
     nativeEvent.stopPropagation();
     const { offsetX, offsetY } = nativeEvent;
     const point = engine.toPoint(offsetX, offsetY);
-    drawMove(point);
+    const canMove = engine.canMove(point);
+    if (canMove) {
+      engine.makeMove(point);
+      drawMove(point);
+    }
   };
 
   return (
