@@ -45,6 +45,14 @@ function startDrawingMovesFromTheCenter(dots, cxt) {
   cxt.lineTo(dots[58].x, dots[58].y);
 }
 
+function drawBall(cxt, ball) {
+  const dotSize = 4;
+  cxt.beginPath();
+  cxt.arc(ball.x, ball.y, dotSize, 0, Math.PI * 2, false);
+  cxt.fill();
+  cxt.stroke();
+}
+
 function clearCanvas(cxt, width, height) {
   cxt.clearRect(0, 0, width, height);
 }
@@ -79,6 +87,11 @@ const useCanvas = (points) => {
       contextRef.current.lineTo(move.x, move.y);
       contextRef.current.stroke();
     });
+    const ball =
+      moves[moves.length - 1] === undefined
+        ? dots[58]
+        : moves[moves.length - 1];
+    drawBall(contextRef.current, ball);
   };
 
   return [canvasRef, drawMoves];
