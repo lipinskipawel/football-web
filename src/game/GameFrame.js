@@ -7,7 +7,7 @@ const height = 600;
 
 const GameFrame = () => {
   const [engine, setEngine] = useState(new GameEngine(width, height));
-  const [canvasRef, drawMove] = useCanvas(engine.points);
+  const [canvasRef, drawMoves] = useCanvas(engine.points);
 
   const onClick = ({ nativeEvent }) => {
     nativeEvent.stopPropagation();
@@ -16,8 +16,8 @@ const GameFrame = () => {
     const canMove = engine.canMove(point);
     if (canMove) {
       engine.makeMove(point);
-      drawMove(point);
       setEngine(engine);
+      drawMoves(engine.movesHistory);
     }
   };
 

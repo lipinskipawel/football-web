@@ -1,5 +1,10 @@
 import { useEffect, useRef } from "react";
 
+function setUpPlayField(cxt, width, height) {
+  cxt.fillStyle = "rgba(0, 170, 45)";
+  cxt.fillRect(0, 0, width, height);
+}
+
 function drawDots(dots, cxt) {
   const dotSize = 3;
 
@@ -40,27 +45,43 @@ function startDrawingMovesFromTheCenter(dots, cxt) {
   cxt.lineTo(dots[58].x, dots[58].y);
 }
 
+function clearCanvas(cxt, width, height) {
+  cxt.clearRect(0, 0, width, height);
+}
+
 const useCanvas = (points) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
+  const dots = [...points];
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     contextRef.current = context;
-    context.fillStyle = "rgba(0, 170, 45)";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    drawDots(points, contextRef.current);
-    drawPitch(points, contextRef.current);
-    startDrawingMovesFromTheCenter(points, contextRef.current);
+    drawMoves([]);
   });
 
-  const drawMove = (point) => {
-    contextRef.current.lineTo(point.x, point.y);
-    contextRef.current.stroke();
+  const drawMoves = (moves) => {
+    clearCanvas(
+      contextRef.current,
+      canvasRef.current.width,
+      canvasRef.current.height
+    );
+    setUpPlayField(
+      contextRef.current,
+      canvasRef.current.width,
+      canvasRef.current.height
+    );
+    drawDots(dots, contextRef.current);
+    drawPitch(dots, contextRef.current);
+    startDrawingMovesFromTheCenter(dots, contextRef.current);
+    moves.forEach((move) => {
+      contextRef.current.lineTo(move.x, move.y);
+      contextRef.current.stroke();
+    });
   };
 
-  return [canvasRef, drawMove];
+  return [canvasRef, drawMoves];
 };
 
 export default useCanvas;

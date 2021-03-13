@@ -4,6 +4,7 @@ class GameEngine {
   constructor(width, height) {
     this.points = this.getAllDots(width, height);
     this.ball = this.points[58];
+    this.movesHistory = [this.ball];
   }
 
   toPoint(x, y) {
@@ -68,6 +69,7 @@ class GameEngine {
     this.ball.makeMove(point);
     this.points[point.index].makeMove(this.ball);
     this.ball = this.points[point.index];
+    this.movesHistory.push(point);
   }
 
   canMove(point) {
