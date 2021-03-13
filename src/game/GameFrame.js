@@ -1,3 +1,4 @@
+import { useState } from "react";
 import GameEngine from "./model/GameEngine";
 import useCanvas from "./ui/useCanvas";
 
@@ -5,8 +6,8 @@ const width = 500;
 const height = 600;
 
 const GameFrame = () => {
-  const [canvasRef, drawMove] = useCanvas();
-  const engine = new GameEngine(width, height);
+  const [engine, setEngine] = useState(new GameEngine(width, height));
+  const [canvasRef, drawMove] = useCanvas(engine.points);
 
   const onClick = ({ nativeEvent }) => {
     nativeEvent.stopPropagation();
@@ -16,6 +17,7 @@ const GameFrame = () => {
     if (canMove) {
       engine.makeMove(point);
       drawMove(point);
+      setEngine(engine);
     }
   };
 

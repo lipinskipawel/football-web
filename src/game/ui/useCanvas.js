@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import GameEngine from "../model/GameEngine";
 
 function drawDots(dots, cxt) {
   const dotSize = 3;
@@ -41,22 +40,20 @@ function startDrawingMovesFromTheCenter(dots, cxt) {
   cxt.lineTo(dots[58].x, dots[58].y);
 }
 
-const useCanvas = () => {
+const useCanvas = (points) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
-  const engine = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
-    engine.current = new GameEngine(canvas.width, canvas.height);
     contextRef.current = context;
     context.fillStyle = "rgba(0, 170, 45)";
     context.fillRect(0, 0, canvas.width, canvas.height);
-    drawDots(engine.current.points, contextRef.current);
-    drawPitch(engine.current.points, contextRef.current);
-    startDrawingMovesFromTheCenter(engine.current.points, contextRef.current);
-  }, []);
+    drawDots(points, contextRef.current);
+    drawPitch(points, contextRef.current);
+    startDrawingMovesFromTheCenter(points, contextRef.current);
+  });
 
   const drawMove = (point) => {
     contextRef.current.lineTo(point.x, point.y);
