@@ -18,9 +18,6 @@ class GameEngine {
         return a.distance - b.distance;
       })
       .slice(0, 4);
-    if (realCoordinates[0].distance === realCoordinates[1].distance) {
-      return null;
-    }
     return this.points[realCoordinates[0].index];
   }
 
