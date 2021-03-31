@@ -15,6 +15,12 @@ class Point {
     ]);
   }
 
+  notAllowToMove(directionsArray) {
+    directionsArray.forEach((dir) => {
+      this.directions.set(dir, false);
+    });
+  }
+
   computeDistance(given_x, given_y) {
     return Math.sqrt(
       Math.pow(this.x - given_x, 2) + Math.pow(this.y - given_y, 2)

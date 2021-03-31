@@ -29,11 +29,46 @@ class GameEngine {
 
     for (var i = 0; i < y.length; i++) {
       for (var j = 0; j < x.length; j++) {
-        points.push(new Point(x[j], y[i], index));
+        points.push(this.preparePointForPitch(new Point(x[j], y[i], index)));
         index++;
       }
     }
     return points;
+  }
+
+  preparePointForPitch(point) {
+    if (this.leftWall(point.index) || this.rightWall(point.index)) {
+      point.notAllowToMove(["N", "S"]);
+    }
+    return point;
+  }
+
+  leftWall(index) {
+    return (
+      index === 18 ||
+      index === 27 ||
+      index === 36 ||
+      index === 45 ||
+      index === 54 ||
+      index === 63 ||
+      index === 72 ||
+      index === 81 ||
+      index === 90
+    );
+  }
+
+  rightWall(index) {
+    return (
+      index === 26 ||
+      index === 35 ||
+      index === 44 ||
+      index === 53 ||
+      index === 62 ||
+      index === 71 ||
+      index === 80 ||
+      index === 89 ||
+      index === 98
+    );
   }
 
   _computeXes(width) {
