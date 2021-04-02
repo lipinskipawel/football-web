@@ -3,55 +3,6 @@ import GameEngine from "./GameEngine";
 const w = 90;
 const h = 130;
 
-// pitch boundaries testing
-test("should not allow to make a move to N, S when ball is on the right edge", () => {
-  const engine = new GameEngine(w, h);
-  goToRightEdge(engine);
-
-  const N = engine.canMove(engine.points[53]);
-  const S = engine.canMove(engine.points[71]);
-
-  expect(N).toBe(false);
-  expect(S).toBe(false);
-});
-
-function goToRightEdge(engine) {
-  const first = engine.points[59];
-  const second = engine.points[60];
-  const third = engine.points[61];
-  const fourth = engine.points[62];
-  engine.makeMove(first);
-  engine.makeMove(second);
-  engine.makeMove(third);
-  engine.makeMove(fourth);
-
-  return engine;
-}
-
-test("should not allow to make a move to N, S when ball is on the left edge", () => {
-  const engine = new GameEngine(w, h);
-  goToLeftEdge(engine);
-
-  const N = engine.canMove(engine.points[45]);
-  const S = engine.canMove(engine.points[63]);
-
-  expect(N).toBe(false);
-  expect(S).toBe(false);
-});
-
-function goToLeftEdge(engine) {
-  const first = engine.points[57];
-  const second = engine.points[56];
-  const third = engine.points[55];
-  const fourth = engine.points[54];
-  engine.makeMove(first);
-  engine.makeMove(second);
-  engine.makeMove(third);
-  engine.makeMove(fourth);
-
-  return engine;
-}
-
 // makeMove testing
 test("should allow move S after moving NE, W", () => {
   const engine = new GameEngine(w, h);
