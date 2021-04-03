@@ -1,6 +1,11 @@
 const preparePoint = (point) => {
-  if (leftWall(point.index) || rightWall(point.index)) {
-    point.notAllowToMove(["N", "S"]);
+  if (leftWall(point.index)) {
+    point.notAllowToMove(["N", "S", "NW", "W", "SW"]);
+    return point;
+  }
+  if (rightWall(point.index)) {
+    point.notAllowToMove(["N", "S", "NE", "E", "SE"]);
+    return point;
   }
   return point;
 };
