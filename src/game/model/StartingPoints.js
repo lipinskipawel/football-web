@@ -7,6 +7,14 @@ const preparePoint = (point) => {
     point.notAllowToMove(["N", "NE", "NW", "E", "W", "S", "SE", "SW"]);
     return point;
   }
+  if (isTopEdgeOfPitch(point.index)) {
+    point.notAllowToMove(["W", "NW", "N", "NE", "E"]);
+    return point;
+  }
+  if (isBottomEdgeOfPitch(point.index)) {
+    point.notAllowToMove(["E", "SE", "S", "SW", "W"]);
+    return point;
+  }
   if (isLeftWall(point.index)) {
     point.notAllowToMove(["N", "S", "NW", "W", "SW"]);
     return point;
@@ -15,8 +23,48 @@ const preparePoint = (point) => {
     point.notAllowToMove(["N", "S", "NE", "E", "SE"]);
     return point;
   }
+  if (isTopEdgeNearGoalRight(point.index)) {
+    point.notAllowToMove(["N", "NE", "E"]);
+    return point;
+  }
+  if (isTopEdgeNearGoalLeft(point.index)) {
+    point.notAllowToMove(["N", "NW", "W"]);
+    return point;
+  }
+  if (isBottomEdgeNearGoalRight(point.index)) {
+    point.notAllowToMove(["S", "SE", "E"]);
+    return point;
+  }
+  if (isBottomEdgeNearGoalLeft(point.index)) {
+    point.notAllowToMove(["S", "SW", "W"]);
+    return point;
+  }
   return point;
 };
+
+function isBottomEdgeNearGoalLeft(index) {
+  return index === 102;
+}
+
+function isBottomEdgeNearGoalRight(index) {
+  return index === 104;
+}
+
+function isTopEdgeNearGoalLeft(index) {
+  return index === 12;
+}
+
+function isTopEdgeNearGoalRight(index) {
+  return index === 14;
+}
+
+function isTopEdgeOfPitch(index) {
+  return index === 10 || index === 11 || index === 15 || index === 16;
+}
+
+function isBottomEdgeOfPitch(index) {
+  return index === 100 || index === 101 || index === 105 || index === 106;
+}
 
 function isOutSideOfPitch(index) {
   return (

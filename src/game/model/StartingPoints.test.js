@@ -1,6 +1,100 @@
 import Point from "./Point";
 import preparePoint from "./StartingPoints";
 
+describe("4 corners next to goal area", () => {
+  it("should not allow to move S, SW, W  when ball is on left edge near bottom goal area", () => {
+    const topBottomEdgeNearLeft = new Point(4, 4, 102);
+
+    const resultPoint = preparePoint(topBottomEdgeNearLeft);
+
+    expect(resultPoint.canMove(111)).toBeFalsy();
+    expect(resultPoint.canMove(110)).toBeFalsy();
+    expect(resultPoint.canMove(101)).toBeFalsy();
+    expect(resultPoint.canMove(103)).toBe(true);
+    expect(resultPoint.canMove(112)).toBe(true);
+    expect(resultPoint.canMove(93)).toBe(true);
+    expect(resultPoint.canMove(93)).toBe(true);
+    expect(resultPoint.canMove(94)).toBe(true);
+  });
+
+  it("should not allow to move S, SE, E  when ball is on right edge near bottom goal area", () => {
+    const topBottomEdgeNearRight = new Point(4, 4, 104);
+
+    const resultPoint = preparePoint(topBottomEdgeNearRight);
+
+    expect(resultPoint.canMove(113)).toBeFalsy();
+    expect(resultPoint.canMove(114)).toBeFalsy();
+    expect(resultPoint.canMove(105)).toBeFalsy();
+    expect(resultPoint.canMove(103)).toBe(true);
+    expect(resultPoint.canMove(112)).toBe(true);
+    expect(resultPoint.canMove(94)).toBe(true);
+    expect(resultPoint.canMove(95)).toBe(true);
+    expect(resultPoint.canMove(96)).toBe(true);
+  });
+
+  it("should not allow to move N, NW, W when ball is on left edge near top goal area", () => {
+    const topEdgeNearGoalLeft = new Point(4, 4, 12);
+
+    const resultPoint = preparePoint(topEdgeNearGoalLeft);
+
+    expect(resultPoint.canMove(3)).toBeFalsy();
+    expect(resultPoint.canMove(2)).toBeFalsy();
+    expect(resultPoint.canMove(11)).toBeFalsy();
+    expect(resultPoint.canMove(4)).toBe(true);
+    expect(resultPoint.canMove(13)).toBe(true);
+    expect(resultPoint.canMove(20)).toBe(true);
+    expect(resultPoint.canMove(21)).toBe(true);
+    expect(resultPoint.canMove(22)).toBe(true);
+  });
+
+  it("should not allow to move N, NE, E when ball is on right edge near top goal area", () => {
+    const topEdgeNearGoalRight = new Point(4, 4, 14);
+
+    const resultPoint = preparePoint(topEdgeNearGoalRight);
+
+    expect(resultPoint.canMove(5)).toBeFalsy();
+    expect(resultPoint.canMove(15)).toBeFalsy();
+    expect(resultPoint.canMove(6)).toBeFalsy();
+    expect(resultPoint.canMove(4)).toBe(true);
+    expect(resultPoint.canMove(13)).toBe(true);
+    expect(resultPoint.canMove(22)).toBe(true);
+    expect(resultPoint.canMove(23)).toBe(true);
+    expect(resultPoint.canMove(24)).toBe(true);
+  });
+});
+
+describe("ball on the top and bottom edge", () => {
+  it("should not allow to move E, SE, S, SW, W when ball is on bottom edge of pitch", () => {
+    const topEdgeOfPitch = new Point(50, 50, 106);
+
+    const resultPoint = preparePoint(topEdgeOfPitch);
+
+    expect(resultPoint.canMove(105)).toBeFalsy();
+    expect(resultPoint.canMove(107)).toBeFalsy();
+    expect(resultPoint.canMove(115)).toBeFalsy();
+    expect(resultPoint.canMove(114)).toBeFalsy();
+    expect(resultPoint.canMove(116)).toBeFalsy();
+    expect(resultPoint.canMove(97)).toBe(true);
+    expect(resultPoint.canMove(96)).toBe(true);
+    expect(resultPoint.canMove(98)).toBe(true);
+  });
+
+  it("should not allow to move W, NW, N, NE, E when ball is on top edge of pitch", () => {
+    const topEdgeOfPitch = new Point(23, 23, 11);
+
+    const resultPoint = preparePoint(topEdgeOfPitch);
+
+    expect(resultPoint.canMove(10)).toBeFalsy();
+    expect(resultPoint.canMove(12)).toBeFalsy();
+    expect(resultPoint.canMove(2)).toBeFalsy();
+    expect(resultPoint.canMove(1)).toBeFalsy();
+    expect(resultPoint.canMove(3)).toBeFalsy();
+    expect(resultPoint.canMove(20)).toBe(true);
+    expect(resultPoint.canMove(19)).toBe(true);
+    expect(resultPoint.canMove(21)).toBe(true);
+  });
+});
+
 describe("ball can not move", () => {
   const parameters = [
     {
