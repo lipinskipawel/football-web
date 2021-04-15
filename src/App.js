@@ -7,7 +7,7 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<GameFrame />} />
+        <Route path="/game" element={<GameFrame />} />
       </Routes>
     </div>
   );
