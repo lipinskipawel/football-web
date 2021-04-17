@@ -1,7 +1,11 @@
 import PlayerList from "./PlayerList";
 
 const Home = () => {
-  return <PlayerList />;
+  return (
+    <div className="home">
+      <PlayerList />
+    </div>
+  );
 };
 
 export default Home;
