@@ -1,7 +1,10 @@
+import NavbarRightSide from "./NavbarRightSide";
+
 const Navbar = () => {
   return (
     <div className="navbar">
-      <h2>Football game</h2>
+      <div>Football game</div>
+      <NavbarRightSide />
     </div>
   );
 };
