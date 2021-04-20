@@ -32,3 +32,18 @@
   width: 800px;
   height: 800px;
 }
+
+.login-page {
+  margin: 0 auto;
+  width: 800px;
+  height: 800px;
+}
+
+.login-page h2 {
+  text-align: center;
+}
+
+.login-page input {
+  margin: 0 auto;
+  display: block;
+}

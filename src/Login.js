@@ -14,14 +14,14 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="login-page">
       <h2>Login form</h2>
       <input
         placeholder={nickname || "Enter your nickname"}
         onKeyUp={onKeyUp}
         autoFocus
       />
-    </>
+    </div>
   );
 };
 
