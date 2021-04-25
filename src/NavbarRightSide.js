@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NavbarRightSide = () => {
   const [user, setUser] = useState();
+  const navigate = useNavigate();
 
   const onLogin = () => {
-    setUser({ nickname: "anonymous" });
+    navigate("/login");
   };
 
   return (
