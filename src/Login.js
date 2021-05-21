@@ -1,14 +1,15 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "./useLocalStorage";
 
 const Login = () => {
-  const [nickname, setNickname] = useState("");
+  const [nickname, setNickname] = useLocalStorage("nickname");
   const navigate = useNavigate();
 
   const onKeyUp = (e) => {
     e.preventDefault();
     setNickname(e.target.value);
     if (e.key === "Enter") {
+      setNickname(nickname);
       navigate("/");
     }
   };

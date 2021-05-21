@@ -1,10 +1,14 @@
+import Navbar from "./Navbar";
 import PlayerList from "./PlayerList";
 
 const Home = () => {
   return (
-    <div className="home">
-      <PlayerList />
-    </div>
+    <>
+      <Navbar />
+      <div className="home">
+        <PlayerList />
+      </div>
+    </>
   );
 };
 

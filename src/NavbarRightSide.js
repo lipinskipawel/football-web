@@ -1,8 +1,8 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "./useLocalStorage";
 
 const NavbarRightSide = () => {
-  const [user, setUser] = useState();
+  const [user] = useLocalStorage("nickname");
   const navigate = useNavigate();
 
   const onLogin = () => {
@@ -13,7 +13,7 @@ const NavbarRightSide = () => {
     <>
       {user && (
         <button disabled style={{ cursor: "default" }}>
-          {user.nickname}
+          {user}
         </button>
       )}
       {!user && <button onClick={onLogin}>Login</button>}
