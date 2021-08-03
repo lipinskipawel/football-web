@@ -1,15 +1,15 @@
-import { useState } from "react";
 import Player from "./Player";
+import useFetch from "./useFetch";
 
 const PlayerList = () => {
-  const [players] = useState([
-    { id: 1, nickname: "Josh", isPlaying: true },
-    { id: 2, nickname: "Mike", isPlaying: false },
-    { id: 3, nickname: "Wen", isPlaying: true },
-  ]);
+  const { data: players, isPending, error } = useFetch(
+    "http://localhost:8000/players"
+  );
 
   return (
     <div>
+      {error && <div>Error</div>}
+      {isPending && <div>Loading...</div>}
       {players &&
         players.map((player) => (
           <Player
