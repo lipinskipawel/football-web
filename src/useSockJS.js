@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import SockJS from "sockjs-client";
 import Stomp from "stompjs";
+import config from "./config.js";
 
 const useSockJS = (url, messageStream) => {
   const [stompClient, setStompClient] = useState(null);
 
   useEffect(() => {
-    const socket = new SockJS(`http://localhost:8080${url}`);
+    const socket = new SockJS(`${config.webSocket.serverUrl}${url}`);
     const stompClientCreated = Stomp.over(socket);
     setStompClient(stompClientCreated);
 
