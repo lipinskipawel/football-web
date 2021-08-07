@@ -5,7 +5,7 @@ import useCanvas from "./ui/useCanvas";
 const width = 500;
 const height = 600;
 
-const GameFrame = () => {
+const GameFrame = ({ onMove }) => {
   const [engine, setEngine] = useState(new GameEngine(width, height));
   const [canvasRef, drawMoves] = useCanvas(engine.points);
 
@@ -18,6 +18,7 @@ const GameFrame = () => {
       engine.makeMove(point);
       setEngine(engine);
       drawMoves(engine.movesHistory);
+      onMove(point);
     }
   };
 
