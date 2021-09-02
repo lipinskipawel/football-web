@@ -1,12 +1,12 @@
 const dev = {
   webSocket: {
-    serverUrl: `http://localhost:8080`,
+    serverUrl: `ws://localhost:8080`,
   },
 };
 
 const prod = {
   webSocket: {
-    serverUrl: `http://localhost:8080`,
+    serverUrl: `ws://localhost:8080`,
   },
 };
 

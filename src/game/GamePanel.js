@@ -1,8 +1,9 @@
-import useSockJS from "../useSockJS";
 import GameFrame from "./GameFrame";
+import useWebSocket from "../useWebSocket";
+import config from "../config";
 
 const GamePanel = () => {
-  const { disconnect, send } = useSockJS("/chat", "/topic/messages");
+  const { disconnect, send } = useWebSocket(config.webSocket.serverUrl);
 
   const dis = () => {
     disconnect();
