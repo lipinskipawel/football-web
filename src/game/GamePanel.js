@@ -8,7 +8,7 @@ const GamePanel = () => {
   return (
     <>
       <div>GamePanel</div>
-      <GameFrame onMove={send} />
+      <GameFrame onMove={(data) => send(JSON.stringify(data))} />
     </>
   );
 };
