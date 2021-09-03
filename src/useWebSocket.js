@@ -15,21 +15,19 @@ const useWebSocket = (url) => {
       console.log(event.data);
     };
 
-    return () => disconnect();
+    return () => {
+      if (socket != null) {
+        socket.close();
+        setSocket(null);
+      }
+    };
   }, [url]);
 
   const send = (dataToSend) => {
     socket.send(dataToSend);
   };
 
-  const disconnect = () => {
-    if (socket != null) {
-      socket.close();
-      setSocket(null);
-    }
-  };
-
-  return { disconnect, send };
+  return { send };
 };
 
 export default useWebSocket;
