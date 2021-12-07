@@ -1,5 +1,5 @@
 import Player from "./Player";
-import useFetch from "./useFetch";
+import useFetch from "./hooks/useFetch";
 
 const PlayerList = () => {
   const { data: players, isPending, error } = useFetch(

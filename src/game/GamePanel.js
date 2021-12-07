@@ -1,5 +1,5 @@
 import GameFrame from "./GameFrame";
-import useWebSocket from "../useWebSocket";
+import useWebSocket from "../hooks/useWebSocket";
 import config from "../config";
 
 const GamePanel = () => {

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from "./useLocalStorage";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 const NavbarRightSide = () => {
   const [user] = useLocalStorage("nickname");
