@@ -1,11 +1,13 @@
 const dev = {
   webSocket: {
+    lobbyUrl: `ws://localhost:8080/lobby`,
     serverUrl: `ws://localhost:8080`,
   },
 };
 
 const prod = {
   webSocket: {
+    lobbyUrl: `ws://localhost:8080/lobby`,
     serverUrl: `ws://localhost:8080`,
   },
 };

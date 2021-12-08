@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useWebSocket = (url) => {
+const useWebSocket = (url, callbackOnMessage) => {
   const [socket, setSocket] = useState(null);
   const [error, setError] = useState(null);
 
@@ -15,6 +15,7 @@ const useWebSocket = (url) => {
       console.log("onmessage");
       console.log(event);
       console.log(event.data);
+      callbackOnMessage(JSON.parse(event.data));
     };
     socket.onerror = () => {
       setSocket(null);
@@ -28,7 +29,7 @@ const useWebSocket = (url) => {
         setError(null);
       }
     };
-  }, [url]);
+  }, [url, callbackOnMessage]);
 
   const send = (dataToSend) => {
     if (socket != null) {
