@@ -25,6 +25,7 @@ const useWebSocket = (url, callbackOnMessage) => {
 
     return () => {
       if (socket != null) {
+        console.log("onclose");
         socket.close();
         setSocket(null);
         setError(null);

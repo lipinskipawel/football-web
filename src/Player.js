@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "./Player.css";
 
 const Player = ({ nickname, isPlaying, onClickCallback }) => {
