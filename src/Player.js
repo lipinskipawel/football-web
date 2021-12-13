@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import "./Player.css";
 
-const Player = ({ nickname, isPlaying }) => {
+const Player = ({ nickname, isPlaying, onClickCallback }) => {
   return (
-    <div className="player">
-      <Link to="/game">
-        <div>{nickname}</div>
-      </Link>
+    <div className="player" onClick={() => onClickCallback(nickname)}>
+      <div>{nickname}</div>
     </div>
   );
 };

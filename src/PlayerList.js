@@ -6,9 +6,24 @@ import Player from "./Player";
 const PlayerList = () => {
   const [players, setPlayers] = useState([]);
   const onDataCallback = useCallback((data) => {
-    setPlayers(data.players);
+    if (data.players !== undefined) {
+      setPlayers(data.players);
+    }
   }, []);
-  const { error } = useWebSocket(config.webSocket.lobbyUrl, onDataCallback);
+
+  const { send, error } = useWebSocket(
+    config.webSocket.lobbyUrl,
+    onDataCallback
+  );
+
+  const onClickPlayer = (clickedUsername) => {
+    const requestToPlay = {
+      opponent: {
+        username: clickedUsername,
+      },
+    };
+    send(JSON.stringify(requestToPlay));
+  };
 
   return (
     <div>
@@ -18,6 +33,7 @@ const PlayerList = () => {
           key={player.username}
           nickname={player.username}
           isPlaying={false}
+          onClickCallback={onClickPlayer}
         />
       ))}
     </div>

@@ -18,6 +18,7 @@ const useWebSocket = (url, callbackOnMessage) => {
       callbackOnMessage(JSON.parse(event.data));
     };
     socket.onerror = () => {
+      console.log("onerror");
       setSocket(null);
       setError(true);
     };
