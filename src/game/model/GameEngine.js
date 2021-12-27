@@ -1,4 +1,4 @@
-import Point from "./Point";
+import Point, { directionToDifference } from "./Point";
 import preparePoint from "./StartingPoints";
 
 class GameEngine {
@@ -20,6 +20,19 @@ class GameEngine {
       })
       .slice(0, 4);
     return this.points[realCoordinates[0].index];
+  }
+
+  /**
+   * This method will convert directions to Point's.
+   *
+   * @param directions is an array of Directions such as [N, NE, E, SE, S, SW, W, NE]
+   * @return array of Point's
+   */
+  toPoints(directions) {
+    let virtualBallPosition = this.ball.index;
+    return directions
+      .map((dir) => directionToDifference(dir))
+      .map((diff) => this.points[(virtualBallPosition += diff)]);
   }
 
   getAllDots(width, height) {
@@ -73,6 +86,16 @@ class GameEngine {
 
   canMove(point) {
     return this.ball.canMove(point.index);
+  }
+
+  /**
+   * This method will check whether the ball can move to given directions.
+   *
+   * @param directions is an array of {String}. Possible strings are [N, NE, E, SE, S, SW, W, NW]
+   * @return bool, true only when ball can be moved by given directions otherwise false
+   */
+  canMoveToDirections(directions) {
+    return this.toPoints(directions).every((point) => this.canMove(point));
   }
 }
 

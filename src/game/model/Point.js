@@ -44,6 +44,12 @@ class Point {
   }
 }
 
+/**
+ * This function will convert given direction to a numerical representation of the direction.
+ * Possible directions are: N, NE, E, SE, S, SW, W, NW
+ *
+ * @return {Number} numerical representation of direction
+ */
 export function directionToDifference(direction) {
   switch (direction) {
     case "N":
