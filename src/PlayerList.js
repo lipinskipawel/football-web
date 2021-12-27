@@ -29,7 +29,7 @@ const PlayerList = () => {
         username: clickedUsername,
       },
     };
-    send(JSON.stringify(requestToPlay));
+    send(requestToPlay);
   };
 
   return (
