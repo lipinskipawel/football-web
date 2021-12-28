@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
 function setUpPlayField(cxt, width, height) {
   cxt.fillStyle = "rgba(0, 170, 45)";
@@ -60,39 +60,42 @@ function clearCanvas(cxt, width, height) {
 const useCanvas = (points) => {
   const canvasRef = useRef(null);
   const contextRef = useRef(null);
-  const dots = [...points];
+  const dots = useMemo(() => [...points], [points]);
+
+  const drawMoves = useCallback(
+    (moves) => {
+      clearCanvas(
+        contextRef.current,
+        canvasRef.current.width,
+        canvasRef.current.height
+      );
+      setUpPlayField(
+        contextRef.current,
+        canvasRef.current.width,
+        canvasRef.current.height
+      );
+      drawDots(dots, contextRef.current);
+      drawPitch(dots, contextRef.current);
+      startDrawingMovesFromTheCenter(dots, contextRef.current);
+      moves.forEach((move) => {
+        contextRef.current.lineTo(move.x, move.y);
+        contextRef.current.stroke();
+      });
+      const ball =
+        moves[moves.length - 1] === undefined
+          ? dots[58]
+          : moves[moves.length - 1];
+      drawBall(contextRef.current, ball);
+    },
+    [dots]
+  );
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     contextRef.current = context;
     drawMoves([]);
-  });
-
-  const drawMoves = (moves) => {
-    clearCanvas(
-      contextRef.current,
-      canvasRef.current.width,
-      canvasRef.current.height
-    );
-    setUpPlayField(
-      contextRef.current,
-      canvasRef.current.width,
-      canvasRef.current.height
-    );
-    drawDots(dots, contextRef.current);
-    drawPitch(dots, contextRef.current);
-    startDrawingMovesFromTheCenter(dots, contextRef.current);
-    moves.forEach((move) => {
-      contextRef.current.lineTo(move.x, move.y);
-      contextRef.current.stroke();
-    });
-    const ball =
-      moves[moves.length - 1] === undefined
-        ? dots[58]
-        : moves[moves.length - 1];
-    drawBall(contextRef.current, ball);
-  };
+  }, [drawMoves]);
 
   return [canvasRef, drawMoves];
 };
