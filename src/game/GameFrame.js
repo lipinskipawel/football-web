@@ -30,7 +30,7 @@ const GameFrame = ({ gameId }) => {
         const points = engine.toPoints(data.move);
         points.forEach((point) => engine.makeMove(point));
         setEngine(engine);
-        drawMoves(engine.movesHistory);
+        drawMoves(engine.getPointsThatWereClicked());
       }
     },
     [engine, drawMoves]
@@ -48,9 +48,13 @@ const GameFrame = ({ gameId }) => {
     if (canMove) {
       engine.makeMove(point);
       setEngine(engine);
-      drawMoves(engine.movesHistory);
-      send(point);
+      drawMoves(engine.getPointsThatWereClicked());
+      send(moveEnvelop(engine.currentPlayerMoves()));
     }
+  };
+
+  const moveEnvelop = (arrayOfMoves) => {
+    return { move: arrayOfMoves };
   };
 
   return (

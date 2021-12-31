@@ -3,16 +3,15 @@ class Point {
     this.x = x;
     this.y = y;
     this.index = index;
-    this.directions = new Map([
-      ["N", true],
-      ["E", true],
-      ["S", true],
-      ["W", true],
-      ["NE", true],
-      ["SE", true],
-      ["SW", true],
-      ["NW", true],
-    ]);
+    this.directions = new Map();
+    this.directions.set("N", true);
+    this.directions.set("E", true);
+    this.directions.set("S", true);
+    this.directions.set("W", true);
+    this.directions.set("NE", true);
+    this.directions.set("SE", true);
+    this.directions.set("SW", true);
+    this.directions.set("NW", true);
   }
 
   notAllowToMove(directionsArray) {
@@ -41,6 +40,18 @@ class Point {
   makeMove(destination) {
     const direction = differenceToDirection(destination.index - this.index);
     this.directions.set(direction, false);
+  }
+
+  /**
+   * This method will return the array of directions that met given condition.
+   *
+   * @param point { Point } that will be examined
+   * @param condition { Boolean } that will be checked
+   */
+  static filterDirections(point, condition) {
+    return Array.from(point.directions.entries())
+      .filter((el) => el[1] === condition)
+      .map((el) => el[0]);
   }
 }
 
@@ -73,7 +84,7 @@ export function directionToDifference(direction) {
   }
 }
 
-function differenceToDirection(difference) {
+export function differenceToDirection(difference) {
   switch (difference) {
     case -9:
       return "N";

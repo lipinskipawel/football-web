@@ -1,11 +1,12 @@
+import MoveHistory from "./MoveHistory";
 import Point, { directionToDifference } from "./Point";
 import preparePoint from "./StartingPoints";
 
 class GameEngine {
   constructor(width, height) {
-    this.points = this.getAllDots(width, height);
+    this.points = GameEngine.getAllPoints(width, height);
     this.ball = this.points[58];
-    this.movesHistory = [this.ball];
+    this.moveHistory = new MoveHistory(this.ball);
   }
 
   toPoint(x, y) {
@@ -35,9 +36,22 @@ class GameEngine {
       .map((diff) => this.points[(virtualBallPosition += diff)]);
   }
 
-  getAllDots(width, height) {
-    const x = this._computeXes(width);
-    const y = this._computeYes(height);
+  /**
+   * This method return an array of points.
+   * Those points represent the ball movement throughout the game.
+   *
+   * @returns array of { Point }'s
+   */
+  getPointsThatWereClicked() {
+    return this.moveHistory.getAllPoints();
+  }
+
+  /**
+   * This method creates all logical { Point }'s that are needed to represent the game state.
+   */
+  static getAllPoints(width, height) {
+    const x = GameEngine._computeXes(width);
+    const y = GameEngine._computeYes(height);
     var index = 0;
     var points = [];
 
@@ -51,7 +65,7 @@ class GameEngine {
     return points;
   }
 
-  _computeXes(width) {
+  static _computeXes(width) {
     const spaceBetweenDots = width / 9;
     const startingPoint = spaceBetweenDots / 2;
     const xes = new Array(9);
@@ -62,7 +76,7 @@ class GameEngine {
     return xes;
   }
 
-  _computeYes(width) {
+  static _computeYes(width) {
     const spaceBetweenDots = width / 13;
     const startingPoint = spaceBetweenDots / 2;
     const xes = new Array(9);
@@ -81,7 +95,17 @@ class GameEngine {
     this.ball.makeMove(point);
     this.points[point.index].makeMove(this.ball);
     this.ball = this.points[point.index];
-    this.movesHistory.push(point);
+    this.moveHistory.register(point);
+  }
+
+  /**
+   * This method will always return an array of current player moves.
+   *
+   * @returns moves as { Array }
+   */
+  currentPlayerMoves() {
+    const moves = this.moveHistory.getAllDirections();
+    return moves[moves.length - 1];
   }
 
   canMove(point) {
