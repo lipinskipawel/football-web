@@ -122,4 +122,17 @@ describe("canMoveToDirections", () => {
 
     expect(canMove).toBeFalsy();
   });
+
+  it("should allow to move when given complex move", () => {
+    const engine = new GameEngine(w, h);
+    const N = engine.points[49];
+    const W = engine.points[48];
+
+    engine.makeMove(N);
+    engine.makeMove(W);
+
+    const canMove = engine.canMoveToDirections(["SE", "E"]);
+
+    expect(canMove).toBeTruthy();
+  });
 });

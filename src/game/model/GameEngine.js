@@ -9,6 +9,14 @@ class GameEngine {
     this.moveHistory = new MoveHistory(this.ball);
   }
 
+  copy(gameEngine) {
+    const copy = new GameEngine(gameEngine.width, gameEngine.height);
+    copy.points = gameEngine.points;
+    copy.ball = copy.points[gameEngine.ball.index];
+    copy.moveHistory = gameEngine.moveHistory;
+    return copy;
+  }
+
   toPoint(x, y) {
     const realCoordinates = this.points
       .map((point, index) => {
@@ -119,7 +127,14 @@ class GameEngine {
    * @return bool, true only when ball can be moved by given directions otherwise false
    */
   canMoveToDirections(directions) {
-    return this.toPoints(directions).every((point) => this.canMove(point));
+    const copy = this.copy(this);
+    return this.toPoints(directions).every((point) => {
+      if (copy.canMove(point)) {
+        copy.makeMove(point);
+        return true;
+      }
+      return false;
+    });
   }
 }
 
