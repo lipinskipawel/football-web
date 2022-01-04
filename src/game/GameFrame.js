@@ -25,12 +25,14 @@ const GameFrame = ({ gameId }) => {
   const [canvasRef, drawMoves] = useCanvas(engine.points);
   const dataReceivedFromOpponent = useCallback(
     (data) => {
-      const canMove = engine.canMoveToDirections(data.move);
-      if (canMove) {
-        const points = engine.toPoints(data.move);
-        points.forEach((point) => engine.makeMove(point));
-        setEngine(engine);
-        drawMoves(engine.getPointsThatWereClicked());
+      if (data.move !== undefined) {
+        const canMove = engine.canMoveToDirections(data.move);
+        if (canMove) {
+          const points = engine.toPoints(data.move);
+          points.forEach((point) => engine.makeMove(point));
+          setEngine(engine);
+          drawMoves(engine.getPointsThatWereClicked());
+        }
       }
     },
     [engine, drawMoves]
