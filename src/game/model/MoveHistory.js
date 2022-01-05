@@ -90,6 +90,15 @@ class MoveHistory {
     }
     return moveBuckets;
   }
+
+  /**
+   * This method will compute whether current player to move is first or second.
+   *
+   * @returns 1 or 0 as { Number }, 1 when first player to move, 0 when second player to move
+   */
+  currentPlayer() {
+    return this.bucketOfMoves.length % 2;
+  }
 }
 
 export default MoveHistory;

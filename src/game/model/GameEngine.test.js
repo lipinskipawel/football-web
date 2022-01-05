@@ -136,3 +136,48 @@ describe("canMoveToDirections", () => {
     expect(canMove).toBeTruthy();
   });
 });
+
+describe("currentPlayer", () => {
+  it("should return first player when no moves has been made", () => {
+    const engine = new GameEngine(w, h);
+
+    expect(engine.currentPlayer()).toBe(1);
+  });
+
+  it("should return second player when one move has been made", () => {
+    const engine = new GameEngine(w, h);
+    const E = engine.points[59];
+
+    engine.makeMove(E);
+
+    expect(engine.currentPlayer()).toBe(0);
+  });
+
+  it("should return first player when complex move is being made", () => {
+    const engine = new GameEngine(w, h);
+    const N = engine.points[49];
+    const W = engine.points[48];
+    const SE = engine.points[58];
+
+    engine.makeMove(N);
+    engine.makeMove(W);
+    engine.makeMove(SE);
+
+    expect(engine.currentPlayer()).toBe(1);
+  });
+
+  it("should return second player when complex move has been made", () => {
+    const engine = new GameEngine(w, h);
+    const N = engine.points[49];
+    const W = engine.points[48];
+    const SE = engine.points[58];
+    const E = engine.points[59];
+
+    engine.makeMove(N);
+    engine.makeMove(W);
+    engine.makeMove(SE);
+    engine.makeMove(E);
+
+    expect(engine.currentPlayer()).toBe(0);
+  });
+});

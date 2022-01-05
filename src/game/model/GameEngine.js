@@ -136,6 +136,15 @@ class GameEngine {
       return false;
     });
   }
+
+  /**
+   * This method is able to return current player that is allowed to move.
+   *
+   * @returns 1 or 0 as { Number }, 1 when first player to move, 0 when second player to move
+   */
+  currentPlayer() {
+    return this.moveHistory.currentPlayer();
+  }
 }
 
 export default GameEngine;
