@@ -10,6 +10,13 @@ class MoveHistory {
     this.bucketOfMoves = [[]];
   }
 
+  copy(moveHistory) {
+    const copy = new MoveHistory();
+    copy.points = [...moveHistory.points];
+    copy.bucketOfMoves = [...moveHistory.bucketOfMoves];
+    return copy;
+  }
+
   /**
    * This method is the API entry point of {@link MoveHistory} class.
    * This method takes a { Point } and stores it.

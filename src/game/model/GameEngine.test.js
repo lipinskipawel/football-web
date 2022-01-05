@@ -181,3 +181,16 @@ describe("currentPlayer", () => {
     expect(engine.currentPlayer()).toBe(0);
   });
 });
+
+describe("copy test", () => {
+  it("should return second player after invoking canMoveToDirections", () => {
+    const engine = new GameEngine(w, h);
+    engine.canMoveToDirections(["NW"]);
+    const points = engine.toPoints(["NW"]);
+    points.forEach((point) => engine.makeMove(point));
+
+    const player = engine.currentPlayer();
+
+    expect(player).toBe(0);
+  });
+});

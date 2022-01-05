@@ -10,10 +10,10 @@ class GameEngine {
   }
 
   copy(gameEngine) {
-    const copy = new GameEngine(gameEngine.width, gameEngine.height);
-    copy.points = gameEngine.points;
+    const copy = new GameEngine();
+    copy.points = [...gameEngine.points];
     copy.ball = copy.points[gameEngine.ball.index];
-    copy.moveHistory = gameEngine.moveHistory;
+    copy.moveHistory = gameEngine.moveHistory.copy(gameEngine.moveHistory);
     return copy;
   }
 
