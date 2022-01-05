@@ -6,7 +6,6 @@ const useLocalStorage = (key, initialValue = undefined) => {
       const item = window.localStorage.getItem(key);
       return item ? item : initialValue;
     } catch (error) {
-      console.log(error);
       return initialValue;
     }
   });

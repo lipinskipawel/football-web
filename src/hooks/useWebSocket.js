@@ -18,25 +18,19 @@ const useWebSocket = (url, callbackOnMessage) => {
   useEffect(() => {
     const socket = new WebSocket(url);
     socket.onopen = () => {
-      console.log("onopen");
       setSocket(socket);
       setError(null);
     };
     socket.onmessage = (event) => {
-      console.log("onmessage");
-      console.log(event);
-      console.log(event.data);
       callbackOnMessage(JSON.parse(event.data));
     };
     socket.onerror = () => {
-      console.log("onerror");
       setSocket(null);
       setError(true);
     };
 
     return () => {
       if (socket != null) {
-        console.log("onclose");
         socket.close();
         setSocket(null);
         setError(null);
