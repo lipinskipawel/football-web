@@ -19,8 +19,9 @@ const height = 600;
  *
  * @component
  * @param gameId this is a gameId used to connect to game
+ * @param onPlayerChange is a callback function that takes 1 or 0 to indicate player to move
  */
-const GameFrame = ({ gameId }) => {
+const GameFrame = ({ gameId, onPlayerChange }) => {
   const [engine, setEngine] = useState(new GameEngine(width, height));
   const [canvasRef, drawMoves] = useCanvas(engine.points);
   const dataReceivedFromOpponent = useCallback(
@@ -32,10 +33,11 @@ const GameFrame = ({ gameId }) => {
           points.forEach((point) => engine.makeMove(point));
           setEngine(engine);
           drawMoves(engine.getPointsThatWereClicked());
+          onPlayerChange(engine.currentPlayer());
         }
       }
     },
-    [engine, drawMoves]
+    [engine, drawMoves, onPlayerChange]
   );
   const { send } = useWebSocket(
     `${config.webSocket.serverUrl}/game/${gameId}`,
@@ -51,6 +53,7 @@ const GameFrame = ({ gameId }) => {
       engine.makeMove(point);
       setEngine(engine);
       drawMoves(engine.getPointsThatWereClicked());
+      onPlayerChange(engine.currentPlayer());
       send(moveEnvelop(engine.currentPlayerMoves()));
     }
   };
