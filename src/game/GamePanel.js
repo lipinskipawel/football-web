@@ -2,7 +2,7 @@ import { useLocation, useParams } from "react-router-dom";
 import GameFrame from "./GameFrame";
 import GamePlayers from "./GamePlayers";
 import "./GamePanel.css";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const GamePanel = () => {
   const params = useParams();
@@ -10,9 +10,9 @@ const GamePanel = () => {
   const [playerTurn] = useState(location.state);
   const [isFirst, setIsFirst] = useState(1);
 
-  const onPlayer = (player) => {
+  const onPlayer = useCallback((player) => {
     setIsFirst(player);
-  };
+  }, []);
 
   return (
     <div className="game-panel">
