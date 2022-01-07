@@ -20,8 +20,9 @@ const height = 600;
  * @component
  * @param gameId this is a gameId used to connect to game
  * @param onPlayerChange is a callback function that takes 1 or 0 to indicate player to move
+ * @param playerTurn indicates on which turn the application user should move
  */
-const GameFrame = ({ gameId, onPlayerChange }) => {
+const GameFrame = ({ gameId, onPlayerChange, playerTurn }) => {
   const [engine, setEngine] = useState(new GameEngine(width, height));
   const [canvasRef, drawMoves] = useCanvas(engine.points);
   const dataReceivedFromOpponent = useCallback(
@@ -49,13 +50,23 @@ const GameFrame = ({ gameId, onPlayerChange }) => {
     const { offsetX, offsetY } = nativeEvent;
     const point = engine.toPoint(offsetX, offsetY);
     const canMove = engine.canMove(point);
-    if (canMove) {
+    if (canMove && canMoveAccordingTo(engine.currentPlayer())) {
       engine.makeMove(point);
       setEngine(engine);
       drawMoves(engine.getPointsThatWereClicked());
       onPlayerChange(engine.currentPlayer());
       send(moveEnvelop(engine.currentPlayerMoves()));
     }
+  };
+
+  /**
+   * Checks whether the user of the application (playerTurn) can move.
+   * This function does that by comparing the playerNumber with the playerTurn.
+   *
+   * @param playerNumber { Number } that is 1 or 0
+   */
+  const canMoveAccordingTo = (playerNumber) => {
+    return playerTurn === (playerNumber === 1 ? "first" : "second");
   };
 
   const moveEnvelop = (arrayOfMoves) => {

@@ -3,19 +3,30 @@ import { useCallback, useState } from "react";
 import config from "./config";
 import Player from "./Player";
 import { useNavigate } from "react-router-dom";
+import useLocalStorage from "./hooks/useLocalStorage";
 
 const PlayerList = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
+  const [nickname] = useLocalStorage("nickname", "anonymous");
+  const getPlayerTurn = useCallback(
+    (data) => {
+      if (nickname === data.first.username) {
+        return "first";
+      }
+      return "second";
+    },
+    [nickname]
+  );
   const onDataCallback = useCallback(
     (data) => {
       if (data.players !== undefined) {
         setPlayers(data.players);
       } else if (data.redirectEndpoint !== undefined) {
-        navigate(`${data.redirectEndpoint}`);
+        navigate(data.redirectEndpoint, { state: getPlayerTurn(data) });
       }
     },
-    [navigate]
+    [navigate, getPlayerTurn]
   );
 
   const { send, error } = useWebSocket(

@@ -2,6 +2,12 @@ import MoveHistory from "./MoveHistory";
 import Point, { directionToDifference } from "./Point";
 import preparePoint from "./StartingPoints";
 
+/**
+ * This is main abstraction used to play a game.
+ * This class is responsible for two things:
+ *   - performing conversion between x,y canvas coordinates to logical point { Point }
+ *   - ensuring all the game invariants holds at any time
+ */
 class GameEngine {
   constructor(width, height) {
     this.points = GameEngine.getAllPoints(width, height);
