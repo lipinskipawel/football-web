@@ -8,6 +8,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 const PlayerList = () => {
   const navigate = useNavigate();
   const [players, setPlayers] = useState([]);
+
   const [nickname] = useLocalStorage("nickname", "anonymous");
   const getPlayerTurn = useCallback(
     (data) => {

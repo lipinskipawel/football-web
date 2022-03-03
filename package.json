@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "@fsouza/prettierd": "^0.18.1",
     "@testing-library/react-hooks": "^5.1.2"
   }
 }
